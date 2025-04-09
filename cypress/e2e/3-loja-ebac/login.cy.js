@@ -44,7 +44,7 @@ describe('Funcionalidade: Login', () => {
         
     });
 
-    it.only('Deve fazer login com sucesso - Usando massa de dados', () => {
+    it('Deve fazer login com sucesso - Usando massa de dados', () => {
 
         cy.get('#username').type(perfil.usuario)
         cy.get('#password').type(perfil.senha)
@@ -54,18 +54,15 @@ describe('Funcionalidade: Login', () => {
         
     });
 
-    it.only('Deve fazer login com sucesso - Usando fixture ', () => {
-        cy.fixture('peril').then(dados => {
-
-        cy.get('#username').type(dados.usuario)
-        cy.get('#password').type(dados.senha)
+    it.only('Deve fazer login com sucesso - Usando fixture', () => {
+        cy.fixture('perfil').then(dados =>{
+        
+        cy.get('#username').type(dados.usuario, {log: false})
+        cy.get('#password').type(dados.senha, {log: false})
         cy.get('.woocommerce-form > .button').click()
 
         cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('contain', 'Olá, diegoqa.teste (não é diegoqa.teste? Sair)')
-
+        
         })
-        
-        
     });
-
 })
