@@ -1,5 +1,7 @@
 /// <reference types="cypress"/>
 
+//Nesse teste vamos interagir com os elementos de login da página loja ebac.
+
 describe('Funcionalidade: Login', () =>{//Bloco de describe(onde ficam os cenários)
 
     beforeEach(() => {//Executa o código antes de cada cenário
