@@ -5,7 +5,7 @@
 describe('Funcionalidade: Produtos', () => {
 
     beforeEach(() => {
-        cy.visit('http://lojaebac.ebaconline.art.br/produtos/')
+        cy.visit('produtos/')
     });
 
     //Ao selecionar os elementos devemos procurar manualmente listas com elementos e ver quantos "matches" temos, os "matches" e os itens que visivelmente são selecionados indicam que temos uma lista. Assim podermos usar metodos como o .first(), .last(), .eq() e .contais() que seleciona o primeiro item da lista.
@@ -21,12 +21,12 @@ describe('Funcionalidade: Produtos', () => {
     });
 
     //Selecionando produto com o método .last()
-    //Esse método não funciona por problemas na página
+    //Esse método não funciona por problemas na página ao clicar no last produto.
     it('Deve selecionar um produto da lista usando o método last()', () => {
         cy.get('.product-block >')//Elemento lista.
         .last()//Seleciona o último elemento da lista.
         .click()
-        // cy.get('.single_add_to_cart_button').should('contain', 'Comprar')
+        cy.get('.single_add_to_cart_button').should('contain', 'Comprar')
     });
 
     //Selecionando produto pela posição no índice

@@ -12,7 +12,10 @@ import{faker} from '@faker-js/faker'//Importa a biblioteca de dados do faker par
 describe('Funcionalidade: Cadastro', () => {
 
     beforeEach(() => {
-        cy.visit('http://lojaebac.ebaconline.art.br/my-account/')
+        cy.visit('my-account/')
+        //Endereço jogado em um arquivo de configuração global.
+        //Funcionalidade mantida.
+        //No arquivo Cypress.config.js faremos a modificação.
     });
     //Nesse teste vamos criar um novo usuário
     
@@ -41,7 +44,7 @@ describe('Funcionalidade: Cadastro', () => {
     });
 
     //Vamos refazer o mesmo teste de cima usando variáveis 
-    it.only('Deve completar o cadastro com sucesso - Usando variáveis', () => {
+    it('Deve completar o cadastro com sucesso - Usando variáveis', () => {
         //Variáveis usadas para guardar email, nome e sobre nome criados pelo faker 
         var nome = faker.person.firstName()
         var email = faker.internet.email(nome)//Vai gerar o email com o firstName para não ficar muito aleatório
