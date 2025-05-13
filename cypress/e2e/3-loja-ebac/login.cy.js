@@ -66,14 +66,25 @@ describe('Funcionalidade: Login', () =>{//Bloco de describe(onde ficam os cenár
         cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('exist')//2º validação (verifica se o elemento existe no DOM)
     });
 
-    //Nesse teste estamos usando a função nativa "fixture" nela temos acesso direto a massa de dados, onde criamos uma ação com o .then e em seguida damos a uma função "dados" que usando o "." acessa a massa de dados pelo seu nome, ex.: dados.usuario
+    //Nesse teste estamos usando a função nativa "fixture" nela temos acesso direto a massa de dados, onde criamos uma ação com o .then e em seguida criamos  uma função "dados" que usando o "." acessa a massa de dados pelo seu nome, ex.: dados.usuario
     it('Deve fazer login com sucesso usando fixture', () => {
-        cy.fixture('perfil').then(dados =>{
+        cy.fixture('perfil').then(dados =>{//Acessa a massa de dados "perfil" , cria ação .then, cria função "dados"
             cy.get('#username').type(dados.usuario,{log: false})// o ,{log: false} serve para ocultar tanto senha quanto usuário no resultado do teste. "Recomendado para ocultar dados sensiveís"
             cy.get('#password').type(dados.senha,{log: false})
             cy.get('.woocommerce-form > .button').click()
             cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('contain', 'Olá, diego.qa.teste (não é diego.qa.teste? Sair')
         })
+        
+    });
+
+    it.only('Deve fazer login usando comando customizado', () => {
+        //Aqui chamamos o comando criando em commands.js
+        //Colocamos a massa de dados que será usada para o teste, essa massa é guardada no comando customizada em commads.js.
+        //Essa é uma forma de deixar o código mais curto e reaproveitável 
+        //Com o cy.login chamamos a função criada e executamos todas as linhas de código criadas em commands.js
+        cy.login('diego.qa.teste@teste.com.br', 'teste123')
+        cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('contain', 'Olá, diego.qa.teste (não é diego.qa.teste? Sair)') 
+
         
     });
 

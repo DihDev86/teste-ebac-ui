@@ -12,7 +12,7 @@ import{faker} from '@faker-js/faker'//Importa a biblioteca de dados do faker par
 describe('Funcionalidade: Cadastro', () => {
 
     beforeEach(() => {
-        cy.visit('my-account/')
+        cy.visit('my-account')
         //Endereço jogado em um arquivo de configuração global.
         //Funcionalidade mantida.
         //No arquivo Cypress.config.js faremos a modificação.
@@ -60,6 +60,14 @@ describe('Funcionalidade: Cadastro', () => {
         cy.get('#account_last_name').type(sobreNome)
         cy.get('.woocommerce-Button').click()
         cy.get('.woocommerce-message').should('contain','Detalhes da conta modificados com sucesso.')
+    });
 
+    it.only('Deve fazer o cadastro usando commands customizados', () => {
+        cy.preCadastro(faker.internet.email(),'teste2025',faker.person.firstName(),faker.person.lastName())
+        //A função preCadastro via ser executada usando o comando customizado do arquivo commands.js 
+        //Cada parâmetro dado na função, será armazanado em cy.commands, ou seja, ocorre uma comunicação entre os arquivos para haver essa customização.
+        //Aqui temos o a função que executa o comando em commands.js
+        //Toda e qualquer alteração deverá ser feita no arquivo commands.js 
+        cy.get('.woocommerce-message').should('contain','Detalhes da conta modificados com sucesso.') 
     });
 });
