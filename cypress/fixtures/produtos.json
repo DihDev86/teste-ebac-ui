@@ -1,0 +1,31 @@
+[
+    {
+        "nomeProduto":"Apollo Running Short",
+        "tamanho": 36,
+        "cor":"Black",
+        "quantidade": 5
+    },
+
+    {
+        "nomeProduto":"Atlas Fitness Tank",
+        "tamanho": "M",
+        "cor":"Blue",
+        "quantidade": 2
+    },
+
+    {
+        "nomeProduto":"Abominable Hoodie",
+        "tamanho": "M",
+        "cor":"Green",
+        "quantidade": 6
+    },
+
+    {
+        "nomeProduto":"Cronus Yoga Pant",
+        "tamanho": 36,
+        "cor":"red",
+        "quantidade": 6
+    }
+
+    
+]

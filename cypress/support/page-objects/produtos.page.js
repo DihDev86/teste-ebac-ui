@@ -59,7 +59,30 @@ class ProdutosPage{
     }
 
     //Neste teste vamos visitar um produto especifico.
-    visitarProdutoEspecifico(){
+    visitarProdutoEspecifico(nomeProduto){
+        
+        //cy.visit(`produtos/${nomeProduto}`)
+        
+        //Para visitar um produto específico precisamos concatenar no parâmetro o endereço da página + nome do produto.
+        //Dessa forma ao passarmos o nome do produto no código, o nome será guardado em nomeProduto, daí quando usamos o cy.visit para acessar a página produtos concatenamos com nomeProduto que guardou o valor nele.E assim conseguimos fazer um teste com um produto específico.
+
+        //No teste ao selecionar o produto, precisamos colocar o nome separado por "-"
+        //Mas podemos usar um método para eliminar o "-"
+        //Para isso precisamos criar um const para receber a url formatada.
+
+        const urlFormatada = nomeProduto.replace(/ /g, '-')
+        //Dessa forma com o método replace pegamos o nome do produto e substituimos de maneira global "g" por espaços "/ /" o "-" e guardados na const urlFormatada.
+
+        cy.visit(`produtos/${urlFormatada}`)
+        //Agora ao invés de usarmos o parâmetro, usaremos a const que guarda o nome do produto sem hífen
+        
+    }
+
+    addProdutoCarrinho2(tamamho,cor,quantidade){//vamos passar os parâmetros por ordem para serem usados 
+        cy.get(`.button-variable-item-${tamamho}`).click()//Vamos concatenar a string do elemento com o parâmetro tamanho e assim sucessivamente.
+        cy.get(`.button-variable-item-${cor}`).click()
+        cy.get('.input-text').clear().type(quantidade)//Como a quantidade será digita em um input text passamos o parâmetro no type.
+        cy.get('.single_add_to_cart_button').click()
         
     }
 

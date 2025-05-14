@@ -98,8 +98,48 @@ describe('Funcionalidade: Produtos', () => {
             produtosPage.buscarProdutoBarraPesquisa('Apollo Running Short')
         });
     
-    it.only('Deve visitar um produto específico.', () => {
-        produtosPage.visitarUrl()
+    it('Deve visitar um produto específico.', () => {
+        produtosPage.visitarProdutoEspecifico('Apollo Running Short')
+        //Ao selecionar o produto, precisamos colocar o nome separado por "-"
+        //Mas podemos usar um método para eliminar o "-"
+        //Para isso precisamos criar um const para receber a url formatada.
+        cy.get('.product_title').should('contain', 'Apollo Running Short')
+    });
+
+    it('Deve adicionar produtos no carrinho - Massa de dados em lista', () => {
+        
+        let qtd = 2 // Podemos guardar a quantidade numa variável e usa-la
+        produtosPage.buscarProdutoBarraPesquisa('Ajax Full-Zip Sweatshirt')
+        produtosPage.addProdutoCarrinho2('XL', 'Blue', qtd )//Agora podemos digitar aqui o que queremos passar para o produtos.page para ser escolhido.
+        //O valores passados aqui serão salvos nos parâmetros no arquivo produtos.page, ele é quem executa os comandos quando chamamos as função acima.
+        
+        cy.get('.woocommerce-message').should('contain', qtd + ' × “Ajax Full-Zip Sweatshirt” foram adicionados no seu carrinho.')
+        //Se eu colocasse um número diferente como parâmentro iria dá erro na validação, porque temos uma validação com 5.
+        //guardando a quantidade numa variável evitamos o erro de validação.
+        
+    });
+
+    it.only('Deve adicionar produtos no carrinho buscando da Massa de dados em lista', () => {
+        
+        cy.fixture('produtos').then(dados => {
+            produtosPage.buscarProdutoBarraPesquisa(dados[1].nomeProduto)
+            produtosPage.addProdutoCarrinho2(
+                dados[1].tamanho, 
+                dados[1].cor, 
+                dados[1].quantidade)
+            
+            //Agora podemos digitar aqui o que queremos passar para o produtos.page 
+            //Aqui iremos usar os produtos de uma massa de dados em um arquivo da pasta fixture
+            //Como temos vários produtos, precisamos selecionar o produto através de dados. + nome do que queremos e em seguida o índice
+            //Precisamos de uma função de busca e nela coloraremos o ítem da massa de dados fixtures que queremos.
+            //Em seguida precisamos de uma função que adicone o ítem no carrinho e que antes selecione as caracteristicas do ítem.
+            
+            cy.get('.woocommerce-message').should('contain', dados[1].nomeProduto)//Aqui faremos a validação com nome do produto.
+            
+
+
+
+        })
     });
 
     
