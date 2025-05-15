@@ -1,0 +1,55 @@
+Aula 5: Modos de execuções de testes e relátorios.
+
+-Existe uma forma de fazer os testes automatizados sem abrir o navegador, é o que chamamos de modo "Headless", basicamente esse modo não precisa da interface gráfica do navegador, ou seja, os teste rodam em segundo plano.
+
+-Esse teste é útil para testes automatizados em esteira, execuções frequentes e agendamentos de execuções e também economiza recursos computacionais.
+
+-Para executar o teste dessa forma usamos:
+npx cypress run n
+
+-Dado o comando, o teste começa a rodar e os resultados são mostrados no terminal.
+
+
+-O comando abaixo deve ser colado abaixo do baseUrl na arquivo cypress.config.js.
+video: true,
+    //Serve para gerar vídeos de toda execução do teste em "Headless". 
+    //Uma pasta com  nome "Vídeos" será criada dentro da pasta cypress os vídeos em mp4.
+
+
+-Podemos configurar essas execuções no arquivo package.jason em scripts.
+    //A vantegem de usar scripts é que podemos definir parâmetros, como por exemplo, definir o navegador que queremos que o teste rode.
+
+    //"scripts" => "teste":  no script chamado teste temos uma string que é onde iremos colocar nosso script. 
+
+    //"teste": "npx cypress run --browser chrome"   
+            //Com esse script estamos dizendo que todas as vezes que executarmos o teste em "Headless" ele será executado no chrome, que foi passado com parâmetro.
+    
+ -script no arquivo package.json:
+         "scripts": {
+    "test": "npx cypress run --browser chrome"
+  },
+
+    -Agora se quisermos executar o teste em "Headless" não usaremos mais o npx cypress run.
+        //Para executar usaremos o script teste.
+        //Ao invés de usarmos o npx agora usaremos o npm run + o nome do script. 
+        //npm run teste
+
+-Cypress Cloud 
+    //Para usar Cypress Cloud precisamos criar nosso login pelo GitHub.
+
+    //Em seguida cria um novo projeto e copiar o projectId: "a3jaa9" e colocar no arquivo do cypress.config.jg abaixo do "module.exports = defineConfig({", feito isso um código será gerado e o copiamos.
+
+    //Copiado o código iremos usa-lo para criar um novo script no arquivo package.jason.
+
+    //Abaixo do script teste criaremos  esse novo script dessa forma "cy:dash": + código criado no cypress Cloud.
+
+    //Dessa forma teremos os nosso teste monitorados pelo cypress Cloud, onde teremos todos os relátorios de teste disponíveis nele.
+
+    //Para rodar o teste sendo  gravado pelo cypress cloud preciamos executar o script criado que é:
+        //npm run cy:dash
+
+
+
+
+
+
